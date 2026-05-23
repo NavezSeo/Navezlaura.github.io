@@ -14,6 +14,10 @@
           --neon-green: #00ff88; 
           --dark-bg: #000000; 
           --card-bg: #0a0a0a;
+          /* Variables dinámicas para el ritmo de la música */
+          --beat-scale: 1;
+          --beat-glow: 10px;
+          --bg-intensity: 0.02;
       }
       
       body {
@@ -24,12 +28,12 @@
           overflow-x: hidden;
       }
 
-      /* Fondo de estrellas */
+      /* Fondo de estrellas reactivo */
       body::before {
           content: "";
           position: fixed;
           top: 0; left: 0; width: 100%; height: 100%;
-          background: radial-gradient(circle at center, rgba(0, 255, 136, 0.02) 0%, transparent 75%),
+          background: radial-gradient(circle at center, rgba(0, 255, 136, calc(var(--bg-intensity) * 3)) 0%, transparent 75%),
                       url('https://www.transparenttextures.com/patterns/stardust.png');
           animation: backgroundMove 150s linear infinite;
           z-index: -2;
@@ -78,141 +82,3 @@
           transition: transform 0.3s ease;
           display: flex;
           flex-direction: column;
-      }
-
-      @keyframes neonBreath {
-          0%, 100% { box-shadow: 0 0 10px var(--neon-green), 0 0 15px rgba(0, 255, 136, 0.2); border-color: var(--neon-green); }
-          50% { box-shadow: 0 0 20px var(--neon-green), 0 0 35px rgba(0, 255, 136, 0.5); border-color: #77ffc9; }
-      }
-
-      .respiracao-card:hover {
-          transform: translateY(-5px);
-          animation: none;
-          box-shadow: 0 0 25px var(--neon-green);
-      }
-
-      .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-      /* --- HERO CONTENT --- */
-      .conteudo-principal { display: flex; align-items: center; justify-content: space-between; padding: 6rem 0; gap: 50px; flex-wrap: wrap; }
-      .conteudo-principal-titulo { font-family: 'Share Tech Mono', monospace; font-size: 3.2rem; margin: 0; text-transform: uppercase; }
-      .conteudo-principal-titulo span { display: block; font-family: 'Poppins'; font-size: 1.1rem; color: var(--neon-green); margin-top: 10px; }
-      .conteudo-principal-imagem img { width: 300px; height: 300px; border-radius: 50%; border: 2px solid var(--neon-green); object-fit: cover; box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
-
-      /* --- REPRODUCTORES --- */
-      .section-title { text-align: center; font-family: 'Chakra Petch'; color: var(--neon-green); margin: 4rem 0 2rem; text-transform: uppercase; letter-spacing: 4px; text-shadow: 0 0 10px var(--neon-green); }
-      .multimedia-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-      .player-header { background: var(--neon-green); color: #000; padding: 6px 15px; font-family: 'Share Tech Mono'; font-weight: bold; display: flex; justify-content: space-between; font-size: 0.8rem; border-radius: 12px 12px 0 0; }
-      .tv-frame { width: 100%; height: 250px; border: none; background: #000; }
-      .radio-display { padding: 20px; text-align: center; }
-      .custom-audio { width: 100%; filter: invert(1) hue-rotate(90deg) brightness(1.5); margin-top: 10px; }
-
-      /* --- PROYECTOS --- */
-      .meu-swiper { padding: 20px 0 60px 0 !important; }
-      .projeto-card { padding: 20px; height: 100%; }
-      .projeto-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
-      .github-btn { padding: 10px; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; text-align: center; border-radius: 5px; font-family: 'Share Tech Mono'; transition: 0.3s; margin-top: auto; }
-      .github-btn:hover { background: var(--neon-green); color: #000; }
-
-      /* Navegación Swiper */
-      .swiper-button-next, .swiper-button-prev { color: var(--neon-green) !important; }
-      .swiper-pagination-bullet-active { background: var(--neon-green) !important; }
-    </style>
-  </head>
-
-  <body>
-    <header style="padding: 20px 0; border-bottom: 1px solid rgba(0,255,136,0.1);">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-        <a href="#" style="font-family:'Chakra Petch'; color:#fff; text-decoration:none; font-size:1.5rem;">LAURA<span style="color:var(--neon-green);">.</span>ATAIDE</a>
-        <nav>
-            <a href="#multimedia" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">MULTIMEDIA</a>
-            <a href="#projetos" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">PORTAFOLIO</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="conteudo-principal">
-        <div class="hero-laser-card">
-          <h1 class="conteudo-principal-titulo">PORTFÓLIO<span>Software Engineer | Backend</span></h1>
-          <p style="font-family: 'Share Tech Mono'; color: #ccc; margin-top: 20px; font-size: 0.9rem; line-height: 1.6;">
-            > Java & Spring Boot Expert.<br>
-            > Infrastructure Specialist.<br>
-            > Status: <span style="color: var(--neon-green);">System_Online</span>
-          </p>
-        </div>
-        <div class="conteudo-principal-imagem"><img src="assets/assets/corporations tumbajulca.png" alt="corporations tumbajulca" /></div>
-      </section>
-
-      <section id="multimedia">
-        <h3 class="section-title">System Stream</h3>
-        <div class="multimedia-container">
-          <div class="respiracao-card">
-            <div class="player-header"><span>LIVE_VIDEO.SYS</span><span>REC ●</span></div>
-            <iframe src="https://www.oranews.tv/livetv2.php" class="tv-frame"></iframe>
-          </div>
-          <div class="respiracao-card">
-            <div class="player-header"><span>RADIO_LINK.EXE</span><span>SIGNAL: HIGH</span></div>
-            <div class="radio-display">
-                <p style="font-family: 'Share Tech Mono'; color: var(--neon-green); font-size: 0.7rem;">DECODING AUDIO STREAM...</p>
-                <audio controls class="custom-audio">
-                    <source src="https://stream.zeno.fm/e9c34m2sg48uv" type="audio/mpeg">
-                </audio>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projetos">
-        <h3 class="section-title">Featured Projects</h3>
-        <div class="swiper meu-swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="projeto-card respiracao-card">
-                <img src="assets/projeto.png" alt="Project">
-                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Java 21 Modernization</h4>
-                <p style="font-size:0.8rem; color:#ccc;">Migración de sistemas para arquitectura Spring Boot.</p>
-                <a href="https://github.com/lauraataide8" class="github-btn" target="_blank">ACCESS_DATA</a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="projeto-card respiracao-card">
-                <img src="assets/milan.png" alt="Project">
-                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">AC Milan Site</h4>
-                <p style="font-size:0.8rem; color:#ccc;">Diseño responsivo para comunidad fan.</p>
-                <a href="https://lauraataide8.github.io/projeto_site_futebol_feminino_senaisp/" class="github-btn" target="_blank">VIEW_INTERFACE</a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="projeto-card respiracao-card">
-                <img src="assets/PETPLACEAPP.png" alt="Project">
-                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Pet Place UX</h4>
-                <p style="font-size:0.8rem; color:#ccc;">Prototipagem de alta fidelidad en Figma.</p>
-                <a href="#" class="github-btn">OPEN_FIGMA</a>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-      </section>
-    </main>
-
-    <footer style="text-align:center; padding:40px; color:#444; font-family:'Share Tech Mono'; font-size:0.7rem;">
-        [SYSTEM_STATUS: ONLINE] - 2026
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-      new Swiper(".meu-swiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: { el: ".swiper-pagination", clickable: true },
-        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-        breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
-      });
-    </script>
-  </body>
-</html>
