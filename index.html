@@ -140,10 +140,10 @@
           width: 90px; height: 160px; 
           background: linear-gradient(135deg, #111116 0%, #08080a 50%, #1c1c24 100%);
           border: 1px solid rgba(255,255,255,0.05);
-          clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 92%, 85% 100%, 15% 100%, 0% 92%, 0% 8%); /* Forma angular facetada */
+          clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 92%, 85% 100%, 15% 100%, 0% 92%, 0% 8%);
           display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px;
           box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,255,255,0.05);
-          transform: scale(var(--beat-scale)); /* Vibración física sincronizada */
+          transform: scale(var(--beat-scale));
           transition: transform 0.04s cubic-bezier(0.25, 1, 0.5, 1);
       }
       
@@ -156,7 +156,6 @@
           position: relative; display: flex; justify-content: center; align-items: center;
       }
       
-      /* Efecto de rayos/plasma interno simulado con pseudoelementos dinámicos */
       .subwoofer-ring::before {
           content: ""; position: absolute; inset: -4px; border-radius: 50%;
           border: 1px dashed #ff0088; opacity: var(--lightning-opacity);
@@ -187,5 +186,140 @@
       .monitor-stand { width: 25px; height: 25px; background: linear-gradient(#151922, #0a0a0f); border: 1px solid rgba(0,255,136,0.3); }
       .monitor-base { width: 75px; height: 5px; background: #151922; border-radius: 2px; border-bottom: 2px solid var(--neon-green); }
 
-      /* Canvas del Ecualizador Holográfico de Cristales */
-      #canvas-equal
+      /* Canvas del Ecualizador Holográfico */
+      #canvas-equalizer { width: 100%; height: 100%; background: transparent; display: block; }
+
+      /* Consola de reproducción inferior */
+      .console-deck {
+          background: linear-gradient(180deg, #0d0f14 0%, #050608 100%);
+          border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 30px;
+          padding: 8px 18px; display: flex; align-items: center; justify-content: space-between;
+          position: relative; z-index: 2; margin-top: 20px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.8), 0 0 10px rgba(0,255,136,0.1);
+      }
+      
+      .console-controls { display: flex; align-items: center; gap: 15px; color: rgba(0,255,136,0.8); font-size: 0.9rem; }
+      .console-controls i { cursor: pointer; transition: 0.2s; padding: 5px; }
+      .console-controls i:hover { color: #fff; text-shadow: 0 0 8px var(--neon-green); }
+      
+      .console-time { font-family: 'Share Tech Mono'; font-size: 0.85rem; color: var(--neon-green); min-width: 40px; text-shadow: 0 0 5px var(--neon-green); text-align: left; }
+
+      /* Barra de volumen */
+      .custom-audio-bar { width: 55%; -webkit-appearance: none; appearance: none; background: #161a22; height: 4px; border-radius: 2px; outline: none; }
+      .custom-audio-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 2px solid var(--neon-green); box-shadow: 0 0 8px var(--neon-green); cursor: pointer; }
+
+      /* --- PROYECTOS --- */
+      .meu-swiper { padding: 20px 0 60px 0 !important; }
+      .projeto-card { padding: 20px; height: 100%; }
+      .projeto-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+      .github-btn { padding: 10px; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; text-align: center; border-radius: 5px; font-family: 'Share Tech Mono'; transition: 0.3s; margin-top: auto; }
+      .github-btn:hover { background: var(--neon-green); color: #000; }
+
+      .swiper-button-next, .swiper-button-prev { color: var(--neon-green) !important; }
+      .swiper-pagination-bullet-active { background: var(--neon-green) !important; }
+    </style>
+  </head>
+
+  <body>
+    <header style="padding: 20px 0; border-bottom: 1px solid rgba(0,255,136,0.1);">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="#" style="font-family:'Chakra Petch'; color:#fff; text-decoration:none; font-size:1.5rem;">LAURA<span style="color:var(--neon-green);">.</span>ATAIDE</a>
+        <nav>
+            <a href="#multimedia" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">MULTIMEDIA</a>
+            <a href="#projetos" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">PORTAFOLIO</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="conteudo-principal">
+        <div class="hero-laser-card">
+          <h1 class="conteudo-principal-titulo">PORTFÓLIO<span>Software Engineer | Backend</span></h1>
+          <p style="font-family: 'Share Tech Mono'; color: #ccc; margin-top: 20px; font-size: 0.9rem; line-height: 1.6;">
+            > Java & Spring Boot Expert.<br>
+            > Infrastructure Specialist.<br>
+            > Status: <span style="color: var(--neon-green);">System_Online</span>
+          </p>
+        </div>
+        <div class="conteudo-principal-imagem"><img src="assets/assets/corporations tumbajulca.png" alt="corporations tumbajulca" /></div>
+      </section>
+
+      <section id="multimedia">
+        <h3 class="section-title">System Stream</h3>
+        <div class="multimedia-container">
+          <div class="respiracao-card">
+            <div class="player-header"><span>LIVE_VIDEO.SYS</span><span>REC ●</span></div>
+            <iframe src="https://www.oranews.tv/livetv2.php" class="tv-frame"></iframe>
+          </div>
+          
+          <div class="respiracao-card">
+            <div class="player-header"><span>RADIO_LINK.EXE</span><span>MAPPED FREQUENCY</span></div>
+            <div class="radio-display">
+                <div class="cyber-grid-bg"></div>
+                <div class="neon-backdrop-frame"></div>
+                
+                <div class="studio-setup">
+                    <div class="speaker">
+                        <div class="tweeter-ring"></div>
+                        <div class="subwoofer-ring"></div>
+                    </div>
+                    
+                    <div class="monitor-wrapper">
+                        <div class="monitor">
+                            <canvas id="canvas-equalizer"></canvas>
+                        </div>
+                        <div class="monitor-stand"></div>
+                        <div class="monitor-base"></div>
+                    </div>
+                    
+                    <div class="speaker">
+                        <div class="tweeter-ring"></div>
+                        <div class="subwoofer-ring"></div>
+                    </div>
+                </div>
+
+                <div class="console-deck">
+                    <div class="console-controls">
+                        <i class="fa-solid fa-play" id="btn-play-pause"></i>
+                        <span class="console-time" id="track-time">0:00</span>
+                    </div>
+                    <input type="range" class="custom-audio-bar" id="volume-slider" min="0" max="1" step="0.05" value="1">
+                    <div class="console-controls">
+                        <i class="fa-solid fa-volume-high" id="btn-mute"></i>
+                    </div>
+                </div>
+
+                <audio id="radio-player" crossorigin="anonymous" preload="auto">
+                    <source src="https://stream.zeno.fm/e9c34m2sg48uv" type="audio/mpeg">
+                </audio>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projetos">
+        <h3 class="section-title">Featured Projects</h3>
+        <div class="swiper meu-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/projeto.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Java 21 Modernization</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Migración de sistemas para arquitectura Spring Boot.</p>
+                <a href="https://github.com/lauraataide8" class="github-btn" target="_blank">ACCESS_DATA</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/milan.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">AC Milan Site</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Diseño responsivo para comunidad fan.</p>
+                <a href="https://lauraataide8.github.io/projeto_site_futebol_feminino_senaisp/" class="github-btn" target="_blank">VIEW_INTERFACE</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/PETPLACEAPP.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Pet Place UX</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Prototipagem de alta fidelidad en Figma.</p>
+                <a href="#" class="github-btn">OPEN_FIG
