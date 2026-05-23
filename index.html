@@ -82,3 +82,289 @@
           transition: transform 0.3s ease;
           display: flex;
           flex-direction: column;
+      }
+
+      @keyframes neonBreath {
+          0%, 100% { box-shadow: 0 0 10px var(--neon-green), 0 0 15px rgba(0, 255, 136, 0.2); border-color: var(--neon-green); }
+          50% { box-shadow: 0 0 20px var(--neon-green), 0 0 35px rgba(0, 255, 136, 0.5); border-color: #77ffc9; }
+      }
+
+      .respiracao-card:hover {
+          transform: translateY(-5px);
+          animation: none;
+          box-shadow: 0 0 25px var(--neon-green);
+      }
+
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+      /* --- HERO CONTENT --- */
+      .conteudo-principal { display: flex; align-items: center; justify-content: space-between; padding: 6rem 0; gap: 50px; flex-wrap: wrap; }
+      .conteudo-principal-titulo { font-family: 'Share Tech Mono', monospace; font-size: 3.2rem; margin: 0; text-transform: uppercase; }
+      .conteudo-principal-titulo span { display: block; font-family: 'Poppins'; font-size: 1.1rem; color: var(--neon-green); margin-top: 10px; }
+      .conteudo-principal-imagem img { width: 300px; height: 300px; border-radius: 50%; border: 2px solid var(--neon-green); object-fit: cover; box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
+
+      /* --- REPRODUCTORES --- */
+      .section-title { text-align: center; font-family: 'Chakra Petch'; color: var(--neon-green); margin: 4rem 0 2rem; text-transform: uppercase; letter-spacing: 4px; text-shadow: 0 0 10px var(--neon-green); }
+      .multimedia-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+      .player-header { background: var(--neon-green); color: #000; padding: 6px 15px; font-family: 'Share Tech Mono'; font-weight: bold; display: flex; justify-content: space-between; font-size: 0.8rem; border-radius: 12px 12px 0 0; }
+      .tv-frame { width: 100%; height: 250px; border: none; background: #000; }
+      
+      /* ESTILIZACIÓN DEL ESTUDIO DE RADIO CYBERPUNK */
+      .radio-display { padding: 20px; text-align: center; background: #050505; position: relative; overflow: hidden; }
+      
+      /* Luces de fondo (Dot Matrix) que brillan con el ritmo */
+      .studio-lights {
+          position: absolute; inset: 0;
+          background-image: radial-gradient(rgba(255, 0, 136, calc(var(--bg-intensity) * 5)) 15%, transparent 20%), 
+                            radial-gradient(rgba(0, 255, 136, calc(var(--bg-intensity) * 4)) 15%, transparent 20%);
+          background-size: 15px 15px;
+          background-position: 0 0, 7.5px 7.5px;
+          opacity: 0.4; z-index: 0;
+      }
+
+      .studio-setup { display: flex; justify-content: center; align-items: flex-end; gap: 15px; position: relative; z-index: 1; margin-bottom: 15px; height: 180px; }
+      
+      /* Parlantes reactivos */
+      .speaker {
+          width: 60px; height: 140px; background: #111; border: 2px solid #222; border-radius: 5px;
+          display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 10px 0;
+          box-shadow: 0 0 calc(var(--beat-glow) / 2) rgba(0, 255, 136, 0.2);
+          transform: scale(calc(1 + (var(--beat-scale) - 1) * 0.15)); /* Vibra al ritmo */
+          transition: transform 0.05s ease;
+      }
+      .cone {
+          width: 40px; height: 40px; background: #1a1a1a; border: 2px solid #333; border-radius: 50%;
+          box-shadow: inset 0 0 10px #000, 0 0 var(--beat-glow) rgba(0, 255, 136, calc(var(--beat-scale) - 0.9));
+      }
+      .cone-small { width: 25px; height: 25px; }
+
+      /* Monitor Central */
+      .monitor-wrapper { display: flex; flex-direction: column; align-items: center; }
+      .monitor {
+          width: 160px; height: 110px; background: #16161a; border: 4px solid #2d2d35; border-radius: 6px;
+          position: relative; display: flex; align-items: flex-end; padding: 2px; overflow: hidden;
+          box-shadow: 0 0 var(--beat-glow) rgba(0, 255, 136, calc(var(--beat-scale) - 0.8));
+      }
+      .monitor-stand { width: 30px; height: 20px; background: #2d2d35; }
+      .monitor-base { width: 70px; height: 6px; background: #2d2d35; border-radius: 3px; }
+
+      /* Canvas del Ecualizador dentro de la pantalla */
+      #canvas-equalizer { width: 100%; height: 100%; background: #020205; }
+
+      .custom-audio { width: 100%; filter: invert(1) hue-rotate(90deg) brightness(1.5); position: relative; z-index: 2; }
+
+      /* --- PROYECTOS --- */
+      .meu-swiper { padding: 20px 0 60px 0 !important; }
+      .projeto-card { padding: 20px; height: 100%; }
+      .projeto-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+      .github-btn { padding: 10px; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; text-align: center; border-radius: 5px; font-family: 'Share Tech Mono'; transition: 0.3s; margin-top: auto; }
+      .github-btn:hover { background: var(--neon-green); color: #000; }
+
+      .swiper-button-next, .swiper-button-prev { color: var(--neon-green) !important; }
+      .swiper-pagination-bullet-active { background: var(--neon-green) !important; }
+    </style>
+  </head>
+
+  <body>
+    <header style="padding: 20px 0; border-bottom: 1px solid rgba(0,255,136,0.1);">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="#" style="font-family:'Chakra Petch'; color:#fff; text-decoration:none; font-size:1.5rem;">LAURA<span style="color:var(--neon-green);">.</span>ATAIDE</a>
+        <nav>
+            <a href="#multimedia" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">MULTIMEDIA</a>
+            <a href="#projetos" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">PORTAFOLIO</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="conteudo-principal">
+        <div class="hero-laser-card">
+          <h1 class="conteudo-principal-titulo">PORTFÓLIO<span>Software Engineer | Backend</span></h1>
+          <p style="font-family: 'Share Tech Mono'; color: #ccc; margin-top: 20px; font-size: 0.9rem; line-height: 1.6;">
+            > Java & Spring Boot Expert.<br>
+            > Infrastructure Specialist.<br>
+            > Status: <span style="color: var(--neon-green);">System_Online</span>
+          </p>
+        </div>
+        <div class="conteudo-principal-imagem"><img src="assets/assets/corporations tumbajulca.png" alt="corporations tumbajulca" /></div>
+      </section>
+
+      <section id="multimedia">
+        <h3 class="section-title">System Stream</h3>
+        <div class="multimedia-container">
+          <div class="respiracao-card">
+            <div class="player-header"><span>LIVE_VIDEO.SYS</span><span>REC ●</span></div>
+            <iframe src="https://www.oranews.tv/livetv2.php" class="tv-frame"></iframe>
+          </div>
+          
+          <div class="respiracao-card">
+            <div class="player-header"><span>RADIO_LINK.EXE</span><span>AUDIO CONTEXT: ACTIVE</span></div>
+            <div class="radio-display">
+                <div class="studio-lights"></div>
+                
+                <div class="studio-setup">
+                    <div class="speaker">
+                        <div class="cone cone-small"></div>
+                        <div class="cone"></div>
+                    </div>
+                    
+                    <div class="monitor-wrapper">
+                        <div class="monitor">
+                            <canvas id="canvas-equalizer"></canvas>
+                        </div>
+                        <div class="monitor-stand"></div>
+                        <div class="monitor-base"></div>
+                    </div>
+                    
+                    <div class="speaker">
+                        <div class="cone cone-small"></div>
+                        <div class="cone"></div>
+                    </div>
+                </div>
+
+                <audio controls crossorigin="anonymous" id="radio-player" class="custom-audio">
+                    <source src="https://stream.zeno.fm/e9c34m2sg48uv" type="audio/mpeg">
+                </audio>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projetos">
+        <h3 class="section-title">Featured Projects</h3>
+        <div class="swiper meu-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/projeto.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Java 21 Modernization</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Migración de sistemas para arquitectura Spring Boot.</p>
+                <a href="https://github.com/lauraataide8" class="github-btn" target="_blank">ACCESS_DATA</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/milan.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">AC Milan Site</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Diseño responsivo para comunidad fan.</p>
+                <a href="https://lauraataide8.github.io/projeto_site_futebol_feminino_senaisp/" class="github-btn" target="_blank">VIEW_INTERFACE</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/PETPLACEAPP.png" alt="Project">
+                <h4>Pet Place UX</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Prototipagem de alta fidelidad en Figma.</p>
+                <a href="#" class="github-btn">OPEN_FIGMA</a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="text-align:center; padding:40px; color:#444; font-family:'Share Tech Mono'; font-size:0.7rem;">
+        [SYSTEM_STATUS: ONLINE] - 2026
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      new Swiper(".meu-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
+      });
+
+      // --- SCRIPT DE AUDIO AVANZADO PARA EL RITMO EN TIEMPO REAL ---
+      const audio = document.getElementById('radio-player');
+      const canvas = document.getElementById('canvas-equalizer');
+      const ctx = canvas.getContext('2d');
+      
+      let audioCtx, analyser, source, dataArray, bufferLength;
+      let initialized = false;
+
+      function initAudio() {
+          if (initialized) return;
+          
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioCtx.createAnalyser();
+          
+          // Conectamos el reproductor de audio al analizador
+          source = audioCtx.createMediaElementSource(audio);
+          source.connect(analyser);
+          analyser.connect(audioCtx.destination);
+          
+          analyser.fftSize = 64; // Resolución de bandas de frecuencia
+          bufferLength = analyser.frequencyBinCount;
+          dataArray = new Uint8Array(bufferLength);
+          
+          canvas.width = canvas.offsetWidth;
+          canvas.height = canvas.offsetHeight;
+          
+          initialized = true;
+          animate();
+      }
+
+      // Escucha cuando el usuario le da play para activar el contexto de audio de forma segura
+      audio.addEventListener('play', () => {
+          initAudio();
+          if (audioCtx.state === 'suspended') {
+              audioCtx.resume();
+          }
+      });
+
+      function animate() {
+          requestAnimationFrame(animate);
+          if (!initialized) return;
+
+          analyser.getByteFrequencyData(dataArray);
+          
+          // Limpiar pantalla del monitor virtual
+          ctx.fillStyle = '#020205';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          let barWidth = (canvas.width / bufferLength) * 1.5;
+          let barHeight;
+          let x = 0;
+          let energySum = 0; // Para calcular el "Golpe" general del ritmo
+
+          // Dibujar las barras de frecuencia estilizadas en el monitor
+          for (let i = 0; i < bufferLength; i++) {
+              barHeight = dataArray[i] / 2.5;
+              energySum += dataArray[i];
+
+              // Gradientes de color estilo ciberpunk/hacker
+              let r = 0;
+              let g = 255;
+              let b = 136;
+              if(i > bufferLength/2) { r = 255; g = 0; b = 136; } // Altos en rosa
+
+              ctx.fillStyle = `rgb(${r},${g},${b})`;
+              ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
+              x += barWidth;
+          }
+
+          // Calcular promedio de volumen para pasarlo a los estilos CSS
+          let volumeNorm = energySum / (bufferLength * 255); // Valor entre 0 y 1
+          
+          if(volumeNorm > 0.05) {
+              // Modificamos las variables CSS en tiempo real
+              document.documentElement.style.setProperty('--beat-scale', 1 + (volumeNorm * 0.3));
+              document.documentElement.style.setProperty('--beat-glow', `${10 + (volumeNorm * 40)}px`);
+              document.documentElement.style.setProperty('--bg-intensity', `${0.02 + (volumeNorm * 0.15)}`);
+          } else {
+              // Valores base en silencio
+              document.documentElement.style.setProperty('--beat-scale', '1');
+              document.documentElement.style.setProperty('--beat-glow', '10px');
+              document.documentElement.style.setProperty('--bg-intensity', '0.02');
+          }
+      }
+    </script>
+  </body>
+</html>
