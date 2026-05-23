@@ -149,7 +149,7 @@
       .monitor-base { width: 70px; height: 6px; background: #2d2d35; border-radius: 3px; }
 
       /* Canvas del Ecualizador dentro de la pantalla */
-      #canvas-equalizer { width: 100%; height: 100%; background: #020205; }
+      #canvas-equalizer { width: 100%; height: 100%; background: #020205; display: block; }
 
       .custom-audio { width: 100%; filter: invert(1) hue-rotate(90deg) brightness(1.5); position: relative; z-index: 2; }
 
@@ -198,7 +198,7 @@
           </div>
           
           <div class="respiracao-card">
-            <div class="player-header"><span>RADIO_LINK.EXE</span><span>AUDIO CONTEXT: ACTIVE</span></div>
+            <div class="player-header"><span>RADIO_LINK.EXE</span><span>AUDIO CONTEXT: READY</span></div>
             <div class="radio-display">
                 <div class="studio-lights"></div>
                 
@@ -222,7 +222,7 @@
                     </div>
                 </div>
 
-                <audio controls crossorigin="anonymous" id="radio-player" class="custom-audio">
+                <audio controls id="radio-player" class="custom-audio" preload="none">
                     <source src="https://stream.zeno.fm/e9c34m2sg48uv" type="audio/mpeg">
                 </audio>
             </div>
@@ -253,7 +253,7 @@
             <div class="swiper-slide">
               <div class="projeto-card respiracao-card">
                 <img src="assets/PETPLACEAPP.png" alt="Project">
-                <h4>Pet Place UX</h4>
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Pet Place UX</h4>
                 <p style="font-size:0.8rem; color:#ccc;">Prototipagem de alta fidelidad en Figma.</p>
                 <a href="#" class="github-btn">OPEN_FIGMA</a>
               </div>
@@ -272,6 +272,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+      // Inicializar Swiper
       new Swiper(".meu-swiper", {
         slidesPerView: 1,
         spaceBetween: 30,
@@ -281,7 +282,7 @@
         breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
       });
 
-      // --- SCRIPT DE AUDIO AVANZADO PARA EL RITMO EN TIEMPO REAL ---
+      // --- SCRIPT INTERACTIVO DE AUDIO ---
       const audio = document.getElementById('radio-player');
       const canvas = document.getElementById('canvas-equalizer');
       const ctx = canvas.getContext('2d');
@@ -289,81 +290,116 @@
       let audioCtx, analyser, source, dataArray, bufferLength;
       let initialized = false;
 
+      // Configuración de dimensiones fijas del canvas al cargar la página
+      canvas.width = canvas.offsetWidth || 152;
+      canvas.height = canvas.offsetHeight || 102;
+
+      // Dibujar pantalla inicial estática por si no se reproduce música aún
+      ctx.fillStyle = '#020205';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0, 255, 136, 0.3)';
+      ctx.font = '10px "Share Tech Mono"';
+      ctx.fillText("READY TO STREAM", 30, 55);
+
       function initAudio() {
           if (initialized) return;
           
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          analyser = audioCtx.createAnalyser();
-          
-          // Conectamos el reproductor de audio al analizador
-          source = audioCtx.createMediaElementSource(audio);
-          source.connect(analyser);
-          analyser.connect(audioCtx.destination);
-          
-          analyser.fftSize = 64; // Resolución de bandas de frecuencia
-          bufferLength = analyser.frequencyBinCount;
-          dataArray = new Uint8Array(bufferLength);
-          
-          canvas.width = canvas.offsetWidth;
-          canvas.height = canvas.offsetHeight;
-          
-          initialized = true;
-          animate();
+          try {
+              audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+              analyser = audioCtx.createAnalyser();
+              
+              source = audioCtx.createMediaElementSource(audio);
+              source.connect(analyser);
+              analyser.connect(audioCtx.destination);
+              
+              analyser.fftSize = 64;
+              bufferLength = analyser.frequencyBinCount;
+              dataArray = new Uint8Array(bufferLength);
+              
+              initialized = true;
+              animate();
+          } catch(e) {
+              console.log("AudioContext bloqueado o restringido por el entorno local. Usando animación simulada.");
+              simulateAnimation();
+          }
       }
 
-      // Escucha cuando el usuario le da play para activar el contexto de audio de forma segura
       audio.addEventListener('play', () => {
           initAudio();
-          if (audioCtx.state === 'suspended') {
+          if (audioCtx && audioCtx.state === 'suspended') {
               audioCtx.resume();
           }
       });
 
+      // Animación Real basada en Frecuencias de Sonido
       function animate() {
           requestAnimationFrame(animate);
           if (!initialized) return;
 
           analyser.getByteFrequencyData(dataArray);
           
-          // Limpiar pantalla del monitor virtual
           ctx.fillStyle = '#020205';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           
-          let barWidth = (canvas.width / bufferLength) * 1.5;
+          let barWidth = (canvas.width / bufferLength) * 1.4;
           let barHeight;
           let x = 0;
-          let energySum = 0; // Para calcular el "Golpe" general del ritmo
+          let energySum = 0;
 
-          // Dibujar las barras de frecuencia estilizadas en el monitor
           for (let i = 0; i < bufferLength; i++) {
               barHeight = dataArray[i] / 2.5;
               energySum += dataArray[i];
 
-              // Gradientes de color estilo ciberpunk/hacker
-              let r = 0;
-              let g = 255;
-              let b = 136;
-              if(i > bufferLength/2) { r = 255; g = 0; b = 136; } // Altos en rosa
+              let r = 0, g = 255, b = 136;
+              if(i > bufferLength/2) { r = 255; g = 0; b = 136; } // Altos en color rosa
 
               ctx.fillStyle = `rgb(${r},${g},${b})`;
               ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
               x += barWidth;
           }
 
-          // Calcular promedio de volumen para pasarlo a los estilos CSS
-          let volumeNorm = energySum / (bufferLength * 255); // Valor entre 0 y 1
+          let volumeNorm = energySum / (bufferLength * 255);
           
           if(volumeNorm > 0.05) {
-              // Modificamos las variables CSS en tiempo real
-              document.documentElement.style.setProperty('--beat-scale', 1 + (volumeNorm * 0.3));
+              document.documentElement.style.setProperty('--beat-scale', 1 + (volumeNorm * 0.2));
               document.documentElement.style.setProperty('--beat-glow', `${10 + (volumeNorm * 40)}px`);
-              document.documentElement.style.setProperty('--bg-intensity', `${0.02 + (volumeNorm * 0.15)}`);
+              document.documentElement.style.setProperty('--bg-intensity', `${0.02 + (volumeNorm * 0.12)}`);
           } else {
-              // Valores base en silencio
-              document.documentElement.style.setProperty('--beat-scale', '1');
-              document.documentElement.style.setProperty('--beat-glow', '10px');
-              document.documentElement.style.setProperty('--bg-intensity', '0.02');
+              resetBeats();
           }
+      }
+
+      // Simulación de respaldo automático por si ejecutas el archivo directo desde disco sin servidor local
+      function simulateAnimation() {
+          requestAnimationFrame(simulateAnimation);
+          if (audio.paused) {
+              resetBeats();
+              return;
+          }
+          
+          ctx.fillStyle = '#020205';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          let x = 0;
+          let barWidth = (canvas.width / 20);
+          let mockEnergy = Math.random() * 0.5 + 0.3;
+
+          for (let i = 0; i < 20; i++) {
+              let barHeight = Math.random() * canvas.height * 0.8;
+              ctx.fillStyle = i % 2 === 0 ? 'var(--neon-green)' : '#ff0088';
+              ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
+              x += barWidth;
+          }
+
+          document.documentElement.style.setProperty('--beat-scale', 1 + (mockEnergy * 0.1));
+          document.documentElement.style.setProperty('--beat-glow', `${10 + (mockEnergy * 30)}px`);
+          document.documentElement.style.setProperty('--bg-intensity', `${0.02 + (mockEnergy * 0.08)}`);
+      }
+
+      function resetBeats() {
+          document.documentElement.style.setProperty('--beat-scale', '1');
+          document.documentElement.style.setProperty('--beat-glow', '10px');
+          document.documentElement.style.setProperty('--bg-intensity', '0.02');
       }
     </script>
   </body>
