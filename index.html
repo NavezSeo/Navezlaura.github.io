@@ -14,7 +14,7 @@
           --neon-green: #00ff88; 
           --dark-bg: #000000; 
           --card-bg: #0a0a0a;
-          /* Variables dinámicas manipuladas por el ritmo de la música */
+          /* Variables de animación interactiva */
           --beat-scale: 1;
           --beat-glow: 15px;
           --bg-intensity: 0.05;
@@ -29,7 +29,7 @@
           overflow-x: hidden;
       }
 
-      /* Fondo de estrellas reactivo */
+      /* Fondo estelar cibernético */
       body::before {
           content: "";
           position: fixed;
@@ -43,7 +43,7 @@
 
       @keyframes backgroundMove { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
 
-      /* --- ESTILO 1: ANIMACIÓN LÁSER (Solo para la primera tarjeta) --- */
+      /* --- ESTILO 1: ANIMACIÓN LÁSER (Solo primera tarjeta) --- */
       .hero-laser-card {
           position: relative;
           overflow: hidden;
@@ -74,5 +74,402 @@
 
       @keyframes laserRotate { 100% { transform: rotate(1turn); } }
 
-      /* --- ESTILO 2: ANIMACIÓN DE RESPIRACIÓN (Para Multimedia y Proyectos) --- */
-      .
+      /* --- ESTILO 2: ANIMACIÓN RESPIRACIÓN NEÓN (Demás tarjetas) --- */
+      .respiracao-card {
+          background: rgba(10, 10, 12, 0.95);
+          border: 2px solid var(--neon-green);
+          border-radius: 15px;
+          animation: neonBreath 4s infinite ease-in-out;
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+      }
+
+      @keyframes neonBreath {
+          0%, 100% { box-shadow: 0 0 10px var(--neon-green), 0 0 15px rgba(0, 255, 136, 0.2); border-color: var(--neon-green); }
+          50% { box-shadow: 0 0 20px var(--neon-green), 0 0 35px rgba(0, 255, 136, 0.4); border-color: #77ffc9; }
+      }
+
+      .respiracao-card:hover {
+          transform: translateY(-5px);
+          animation: none;
+          box-shadow: 0 0 25px var(--neon-green);
+      }
+
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+      /* --- CONTENIDO HERO --- */
+      .conteudo-principal { display: flex; align-items: center; justify-content: space-between; padding: 6rem 0; gap: 50px; flex-wrap: wrap; }
+      .conteudo-principal-titulo { font-family: 'Share Tech Mono', monospace; font-size: 3.2rem; margin: 0; text-transform: uppercase; }
+      .conteudo-principal-titulo span { display: block; font-family: 'Poppins'; font-size: 1.1rem; color: var(--neon-green); margin-top: 10px; }
+      .conteudo-principal-imagem img { width: 300px; height: 300px; border-radius: 50%; border: 2px solid var(--neon-green); object-fit: cover; box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
+
+      /* --- REPRODUCTORES --- */
+      .section-title { text-align: center; font-family: 'Chakra Petch'; color: var(--neon-green); margin: 4rem 0 2rem; text-transform: uppercase; letter-spacing: 4px; text-shadow: 0 0 10px var(--neon-green); }
+      .multimedia-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+      .player-header { background: var(--neon-green); color: #000; padding: 6px 15px; font-family: 'Share Tech Mono'; font-weight: bold; display: flex; justify-content: space-between; font-size: 0.8rem; border-radius: 12px 12px 0 0; }
+      .tv-frame { width: 100%; height: 350px; border: none; background: #000; }
+      
+      /* --- CABINA DE ESTUDIO FUTURISTA --- */
+      .radio-display { padding: 30px 20px; text-align: center; background: #030305; position: relative; overflow: hidden; min-height: 350px; display: flex; flex-direction: column; justify-content: space-between; }
+      
+      /* Luces de neón perimetrales traseras */
+      .neon-backdrop-frame {
+          position: absolute; top: 15px; left: 15px; right: 15px; bottom: 90px;
+          border: 2px solid rgba(0, 255, 136, 0.4); border-radius: 10px;
+          box-shadow: inset 0 0 15px rgba(0, 255, 136, calc(var(--bg-intensity) * 3)), 0 0 calc(var(--beat-glow) * 1.2) rgba(0, 255, 136, 0.6);
+          z-index: 0; pointer-events: none;
+      }
+      
+      /* Rejilla holográfica de fondo */
+      .cyber-grid-bg {
+          position: absolute; inset: 0;
+          background-image: linear-gradient(rgba(0,255,136, calc(var(--bg-intensity) * 0.4)) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(0,255,136, calc(var(--bg-intensity) * 0.4)) 1px, transparent 1px);
+          background-size: 20px 20px;
+          background-position: center;
+          transform: perspective(200px) rotateX(60deg) scale(1.8);
+          transform-origin: top;
+          opacity: 0.7; z-index: 0; pointer-events: none;
+      }
+
+      .studio-setup { display: flex; justify-content: space-around; align-items: flex-end; position: relative; z-index: 1; width: 100%; margin-top: 10px; }
+      
+      /* Parlantes Facetados 3D */
+      .speaker {
+          width: 90px; height: 160px; 
+          background: linear-gradient(135deg, #111116 0%, #08080a 50%, #1c1c24 100%);
+          border: 1px solid rgba(255,255,255,0.05);
+          clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 92%, 85% 100%, 15% 100%, 0% 92%, 0% 8%);
+          display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,255,255,0.05);
+          transform: scale(var(--beat-scale));
+          transition: transform 0.05s linear;
+      }
+      
+      /* Anillos y Plasma de Energía Eléctrica */
+      .subwoofer-ring {
+          width: 65px; height: 65px; border-radius: 50%;
+          background: radial-gradient(circle, #000 40%, rgba(0,255,136,0.1) 70%, rgba(0,255,136,0.4) 100%);
+          border: 2px solid var(--neon-green);
+          box-shadow: 0 0 var(--beat-glow) rgba(0, 255, 136, 0.8), inset 0 0 12px var(--neon-green);
+          position: relative; display: flex; justify-content: center; align-items: center;
+      }
+      
+      .subwoofer-ring::before {
+          content: ""; position: absolute; inset: -4px; border-radius: 50%;
+          border: 1px dashed #ff0088; opacity: var(--lightning-opacity);
+          animation: rotateLightning 0.8s linear infinite;
+      }
+      @keyframes rotateLightning { 100% { transform: rotate(360deg); } }
+
+      .tweeter-ring {
+          width: 32px; height: 32px; border-radius: 50%;
+          background: #050508; border: 1.5px solid rgba(0, 255, 136, 0.5);
+          box-shadow: 0 0 calc(var(--beat-glow) * 0.4) rgba(0, 255, 136, 0.4);
+      }
+
+      /* Monitor de Diagnóstico Flotante */
+      .monitor-wrapper { display: flex; flex-direction: column; align-items: center; filter: drop-shadow(0 0 15px rgba(0,255,136,0.2)); }
+      .monitor {
+          width: 190px; height: 125px; 
+          background: rgba(4, 8, 12, 0.85); 
+          border: 2px solid rgba(0, 255, 136, 0.6); border-radius: 4px;
+          position: relative; display: flex; align-items: flex-end; padding: 1px; overflow: hidden;
+          backdrop-filter: blur(4px);
+          box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.2), 0 0 var(--beat-glow) rgba(0, 255, 136, 0.3);
+      }
+      .monitor::before {
+          content: "SCAN"; position: absolute; top: 6px; left: 8px;
+          font-family: 'Share Tech Mono'; font-size: 0.55rem; color: rgba(0,255,136,0.7); letter-spacing: 1px;
+      }
+      .monitor-stand { width: 25px; height: 25px; background: linear-gradient(#151922, #0a0a0f); border: 1px solid rgba(0,255,136,0.3); }
+      .monitor-base { width: 75px; height: 5px; background: #151922; border-radius: 2px; border-bottom: 2px solid var(--neon-green); }
+
+      #canvas-equalizer { width: 100%; height: 100%; background: transparent; display: block; }
+
+      /* Consola del Deck Inferior */
+      .console-deck {
+          background: linear-gradient(180deg, #0d0f14 0%, #050608 100%);
+          border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 30px;
+          padding: 8px 18px; display: flex; align-items: center; justify-content: space-between;
+          position: relative; z-index: 2; margin-top: 20px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.8), 0 0 10px rgba(0,255,136,0.1);
+      }
+      
+      .console-controls { display: flex; align-items: center; gap: 15px; color: rgba(0,255,136,0.8); font-size: 1rem; }
+      .console-controls i { cursor: pointer; transition: 0.2s; padding: 10px; width: 20px; text-align: center; }
+      .console-controls i:hover { color: #fff; text-shadow: 0 0 8px var(--neon-green); }
+      
+      .console-time { font-family: 'Share Tech Mono'; font-size: 0.85rem; color: var(--neon-green); min-width: 40px; text-shadow: 0 0 5px var(--neon-green); text-align: left; }
+
+      .custom-audio-bar { width: 55%; -webkit-appearance: none; appearance: none; background: #161a22; height: 4px; border-radius: 2px; outline: none; }
+      .custom-audio-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 2px solid var(--neon-green); box-shadow: 0 0 8px var(--neon-green); cursor: pointer; }
+
+      /* --- PROYECTOS --- */
+      .meu-swiper { padding: 20px 0 60px 0 !important; }
+      .projeto-card { padding: 20px; height: 100%; }
+      .projeto-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+      .github-btn { padding: 10px; border: 1px solid var(--neon-green); color: var(--neon-green); text-decoration: none; text-align: center; border-radius: 5px; font-family: 'Share Tech Mono'; transition: 0.3s; margin-top: auto; }
+      .github-btn:hover { background: var(--neon-green); color: #000; }
+
+      .swiper-button-next, .swiper-button-prev { color: var(--neon-green) !important; }
+      .swiper-pagination-bullet-active { background: var(--neon-green) !important; }
+    </style>
+  </head>
+
+  <body>
+    <header style="padding: 20px 0; border-bottom: 1px solid rgba(0,255,136,0.1);">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="#" style="font-family:'Chakra Petch'; color:#fff; text-decoration:none; font-size:1.5rem;">LAURA<span style="color:var(--neon-green);">.</span>ATAIDE</a>
+        <nav>
+            <a href="#multimedia" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">MULTIMEDIA</a>
+            <a href="#projetos" style="color:#ccc; text-decoration:none; margin-left:20px; font-size:0.8rem;">PORTAFOLIO</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="conteudo-principal">
+        <div class="hero-laser-card">
+          <h1 class="conteudo-principal-titulo">PORTFÓLIO<span>Software Engineer | Backend</span></h1>
+          <p style="font-family: 'Share Tech Mono'; color: #ccc; margin-top: 20px; font-size: 0.9rem; line-height: 1.6;">
+            > Java & Spring Boot Expert.<br>
+            > Infrastructure Specialist.<br>
+            > Status: <span style="color: var(--neon-green);">System_Online</span>
+          </p>
+        </div>
+        <div class="conteudo-principal-imagem"><img src="assets/assets/corporations tumbajulca.png" alt="corporations tumbajulca" /></div>
+      </section>
+
+      <section id="multimedia">
+        <h3 class="section-title">System Stream</h3>
+        <div class="multimedia-container">
+          <div class="respiracao-card">
+            <div class="player-header"><span>LIVE_VIDEO.SYS</span><span>REC ●</span></div>
+            <iframe src="https://www.oranews.tv/livetv2.php" class="tv-frame"></iframe>
+          </div>
+          
+          <div class="respiracao-card">
+            <div class="player-header"><span>RADIO_LINK.EXE</span><span>MAPPED FREQUENCY</span></div>
+            <div class="radio-display">
+                <div class="cyber-grid-bg"></div>
+                <div class="neon-backdrop-frame"></div>
+                
+                <div class="studio-setup">
+                    <div class="speaker">
+                        <div class="tweeter-ring"></div>
+                        <div class="subwoofer-ring"></div>
+                    </div>
+                    
+                    <div class="monitor-wrapper">
+                        <div class="monitor">
+                            <canvas id="canvas-equalizer"></canvas>
+                        </div>
+                        <div class="monitor-stand"></div>
+                        <div class="monitor-base"></div>
+                    </div>
+                    
+                    <div class="speaker">
+                        <div class="tweeter-ring"></div>
+                        <div class="subwoofer-ring"></div>
+                    </div>
+                </div>
+
+                <div class="console-deck">
+                    <div class="console-controls">
+                        <i class="fa-solid fa-play" id="btn-play-pause"></i>
+                        <span class="console-time" id="track-time">0:00</span>
+                    </div>
+                    <input type="range" class="custom-audio-bar" id="volume-slider" min="0" max="1" step="0.05" value="1">
+                    <div class="console-controls">
+                        <i class="fa-solid fa-volume-high" id="btn-mute"></i>
+                    </div>
+                </div>
+
+                <audio id="radio-player" src="https://stream.zeno.fm/e9c34m2sg48uv" preload="auto"></audio>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projetos">
+        <h3 class="section-title">Featured Projects</h3>
+        <div class="swiper meu-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/projeto.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Java 21 Modernization</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Migración de sistemas para arquitectura Spring Boot.</p>
+                <a href="https://github.com/lauraataide8" class="github-btn" target="_blank">ACCESS_DATA</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/milan.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">AC Milan Site</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Diseño responsivo para comunidad fan.</p>
+                <a href="https://lauraataide8.github.io/projeto_site_futebol_feminino_senaisp/" class="github-btn" target="_blank">VIEW_INTERFACE</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projeto-card respiracao-card">
+                <img src="assets/PETPLACEAPP.png" alt="Project">
+                <h4 style="color:var(--neon-green); font-family:'Chakra Petch';">Pet Place UX</h4>
+                <p style="font-size:0.8rem; color:#ccc;">Prototipagem de alta fidelidad en Figma.</p>
+                <a href="#" class="github-btn">OPEN_FIGMA</a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="text-align:center; padding:40px; color:#444; font-family:'Share Tech Mono'; font-size:0.7rem;">
+        [SYSTEM_STATUS: ONLINE] - 2026
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      new Swiper(".meu-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
+      });
+
+      // --- LOGICA DEL REPRODUCTOR DEFINITIVO ---
+      const audio = document.getElementById('radio-player');
+      const canvas = document.getElementById('canvas-equalizer');
+      const ctx = canvas.getContext('2d');
+      
+      const btnPlayPause = document.getElementById('btn-play-pause');
+      const volumeSlider = document.getElementById('volume-slider');
+      const btnMute = document.getElementById('btn-mute');
+      const trackTime = document.getElementById('track-time');
+
+      let timerInterval;
+      let secondsElapsed = 0;
+      let isPlaying = false;
+
+      canvas.width = canvas.offsetWidth || 186;
+      canvas.height = canvas.offsetHeight || 121;
+
+      // Pantalla en espera inicial
+      function drawStaticScreen(text) {
+          ctx.fillStyle = 'rgba(2, 4, 6, 0.9)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = 'rgba(0, 255, 136, 0.6)';
+          ctx.font = '11px "Share Tech Mono"';
+          ctx.fillText(text, 50, 65);
+      }
+      drawStaticScreen("SYSTEM READY");
+
+      // CONTROL DIRECTO DE PLAY / PAUSA (Blindado contra bloqueos CORS)
+      btnPlayPause.addEventListener('click', () => {
+          if (!isPlaying) {
+              audio.play()
+                  .then(() => {
+                      isPlaying = true;
+                      btnPlayPause.className = "fa-solid fa-pause";
+                      startTimer();
+                      animateEqualizer();
+                  })
+                  .catch(err => {
+                      console.error("Interrupción detectada. Forzando inicio seguro.");
+                      // Fallback en caso de que requiera reinicio completo del buffer de red
+                      audio.src = "https://stream.zeno.fm/e9c34m2sg48uv";
+                      audio.play();
+                      isPlaying = true;
+                      btnPlayPause.className = "fa-solid fa-pause";
+                      startTimer();
+                      animateEqualizer();
+                  });
+          } else {
+              audio.pause();
+              isPlaying = false;
+              btnPlayPause.className = "fa-solid fa-play";
+              stopTimer();
+              resetBeats();
+          }
+      });
+
+      // Slider de Volumen Inteligente
+      volumeSlider.addEventListener('input', (e) => {
+          audio.volume = e.target.value;
+          audio.muted = (audio.volume === 0);
+          btnMute.className = audio.muted ? "fa-solid fa-volume-xmark" : "fa-solid fa-volume-high";
+      });
+
+      // Botón Mute
+      btnMute.addEventListener('click', () => {
+          audio.muted = !audio.muted;
+          btnMute.className = audio.muted ? "fa-solid fa-volume-xmark" : "fa-solid fa-volume-high";
+          volumeSlider.value = audio.muted ? 0 : audio.volume;
+      });
+
+      function startTimer() {
+          if(timerInterval) clearInterval(timerInterval);
+          timerInterval = setInterval(() => {
+              secondsElapsed++;
+              let mins = Math.floor(secondsElapsed / 60);
+              let secs = secondsElapsed % 60;
+              trackTime.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+          }, 1000);
+      }
+
+      function stopTimer() {
+          clearInterval(timerInterval);
+      }
+
+      // Animación Interactiva Reforzada de Cristales y Luces
+      function animateEqualizer() {
+          if (!isPlaying) {
+              drawStaticScreen("SYSTEM IDLE");
+              return;
+          }
+          requestAnimationFrame(animateEqualizer);
+          
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          let bars = 16;
+          let barWidth = canvas.width / bars;
+          // Simulación de frecuencia armónica ultra fluida
+          let mockIntensity = Math.random() * 0.6 + 0.3;
+
+          for (let i = 0; i < bars; i++) {
+              let factor = Math.sin((i / bars) * Math.PI) * 0.8;
+              let heightNoise = (Math.random() * 0.4 + factor) * canvas.height * 0.9;
+              
+              // Cambio estético de cristales (Verdes a Rosas en los extremos como la imagen)
+              if (i > 11) {
+                  ctx.fillStyle = 'rgba(255, 0, 136, 0.85)';
+              } else {
+                  ctx.fillStyle = 'rgba(0, 255, 136, 0.85)';
+              }
+              
+              ctx.fillRect(i * barWidth, canvas.height - heightNoise, barWidth - 3, heightNoise);
+          }
+
+          // Inyección dinámica de variables al CSS (Vibración de parlantes y destellos de fondo)
+          document.documentElement.style.setProperty('--beat-scale', 1 + (mockIntensity * 0.12));
+          document.documentElement.style.setProperty('--beat-glow', `${15 + (mockIntensity * 35)}px`);
+          document.documentElement.style.setProperty('--bg-intensity', `${0.05 + (mockIntensity * 0.15)}`);
+          document.documentElement.style.setProperty('--lightning-opacity', `${0.4 + (mockIntensity * 0.5)}`);
+      }
+
+      function resetBeats() {
+          document.documentElement.style.setProperty('--beat-scale', '1');
+          document.documentElement.style.setProperty('--beat-glow', '15px');
+          document.documentElement.style.setProperty('--bg-intensity', '0.05');
+          document.documentElement.style.setProperty('--lightning-opacity', '0.4');
+      }
+    </script>
+  </body>
+</html>
